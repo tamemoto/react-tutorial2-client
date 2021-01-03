@@ -1,13 +1,18 @@
 import React, { FC } from "react";
 import { useEffect, useState } from "react"
 import { useLocation, useParams } from "react-router-dom"
-import { getRestaurant, getRestaurantReviews } from "../service/api";
+import { getRestaurant, getRestaurantReviews, postRestaurantReview } from "../service/api";
 import Breadcrumb from "../components/Breadcrumb"
 import Loading from "../components/Loading"
 import Pagination from "../components/Pagination"
 import Review from "../components/Review"
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Form: FC<{ onSubmit: any }> = ({ onSubmit }) => {
+
+    const { isAuthenticated } = useAuth0()
+
     const handleFormSubmit = (event: any) => {
         event.preventDefault()
         if(onSubmit) {
@@ -27,7 +32,12 @@ const Form: FC<{ onSubmit: any }> = ({ onSubmit }) => {
                 <div className="control">
                     <label className="label">タイトル</label>
                     <div className="control">
-                        <input name="title" className="input" required disabled />
+                        <input
+                            name="title"
+                            className="input"
+                            required
+                            disabled={!isAuthenticated}
+                        />
                     </div>
                 </div>
             </div>
@@ -35,13 +45,22 @@ const Form: FC<{ onSubmit: any }> = ({ onSubmit }) => {
                 <div className="control">
                     <label className="label">コメント</label>
                     <div className="control">
-                        <textarea name="comment" className="textarea" required disabled></textarea>
+                        <textarea
+                            name="comment"
+                            className="textarea"
+                            required
+                            disabled={!isAuthenticated}
+                        ></textarea>
                     </div>
                 </div>
             </div>
             <div className="field">
                 <div className="control">
-                    <button type="submit" className="button is-warning" disabled>
+                    <button
+                        type="submit"
+                        className="button is-warning"
+                        disabled={!isAuthenticated}
+                    >
                         レビューを投稿
                     </button>
                 </div>
@@ -107,6 +126,8 @@ export const RestaurantDetailPage: FC = () => {
     const [restaurant, setRestaurant] = useState(null)
     const [reviews, setReviews] = useState(null)
 
+    const { getAccessTokenWithPopup } = useAuth0()
+
     const params: any = useParams()
     const location = useLocation()
     const query = new URLSearchParams(location.search)
@@ -130,6 +151,22 @@ export const RestaurantDetailPage: FC = () => {
 
         fetchReview()
     }, [params.restaurantId, page])
+
+    const handleFormSubmit = async (record: any) => {
+        await postRestaurantReview(
+            params.restaurantId,
+            record,
+            getAccessTokenWithPopup
+        )
+
+        const data = await getRestaurantReviews(params.restaurantId, {
+            limit: perPage,
+            offset: (page - 1) * perPage
+        })
+
+        setReviews(data)
+    }
+
 
     return (
         <>
@@ -157,7 +194,7 @@ export const RestaurantDetailPage: FC = () => {
                 />
             )}
             <div className="box">
-                <Form onSubmit={null} />
+                <Form onSubmit={handleFormSubmit} />
             </div>
         </>
     );

@@ -2,6 +2,52 @@ import React, {FC} from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { RestaurantDetailPage } from "./container/RestaurantDetail";
 import { RestaurantListPage } from "./container/RestaurantList";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const AuthButton = () => {
+    const { isLoading, isAuthenticated, loginWithRedirect, logout } = useAuth0()
+
+    const handleClickLoginButton = () => {
+        loginWithRedirect({
+            appState: {
+                path: window.location.pathname
+            }
+        })
+    }
+
+    const handleClickLogoutButton = () => {
+        logout({
+            localOnly: true,
+        })
+    }
+
+    if(isLoading) {
+        return (
+            <button className="button is-warning is-inverted is-outlined is-loading">
+                Loading
+            </button>
+        )
+    }
+
+    if(isAuthenticated) {
+        return (
+            <button className="button is-warning is-inverted is-outlined"
+                    onClick={handleClickLogoutButton}
+            >
+                ログアウト
+            </button>
+        )
+    }
+
+    return (
+        <button
+            className="button is-warning is-inverted is-outlined"
+            onClick={handleClickLoginButton}
+        >
+            ログイン
+        </button>
+    )
+}
 
 const Header: FC = () => {
     return(
@@ -40,9 +86,7 @@ const App: FC = () => {
           <section className="section has-background-warning-light">
               <div className="container">
                   <div className="block has-text-right">
-                      <button className="button is-waring is-inverted is-outlined">
-                          ログイン
-                      </button>
+                      <AuthButton />
                   </div>
                   <Switch>
                       <Route path="/" exact>
