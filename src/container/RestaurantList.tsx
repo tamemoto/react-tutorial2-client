@@ -4,6 +4,7 @@ import Breadcrumb from "../components/Breadcrumb"
 import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
 import Restaurant from "../components/Restaurant";
+import { RestaurantType } from "../@types";
 
 import { getRestaurants } from "../service/api";
 
@@ -39,8 +40,8 @@ export const RestaurantListPage = () => {
             ): (
                 <>
                     <div className="block">
-                        {restaurants.rows.map((restaurant: any) => {
-                            return <Restaurant key={restaurant.id} restaurant={restaurant}/>
+                        {restaurants.rows.map((restaurant: RestaurantType) => {
+                            return <Restaurant key={restaurant.id} {...restaurant} />
                         })}
                     </div>
                     <div className="block">

@@ -1,8 +1,9 @@
 import React, { FC } from "react"
 import { Link } from "react-router-dom"
 import Review from "./Review"
+import { RestaurantType } from "../@types";
 
-const Restaurant: FC<{ restaurant: any }> = ({ restaurant }) => {
+const Restaurant: FC<RestaurantType> = (restaurant) => {
     return(
         <article className="box">
             <div className="columns">

@@ -1,7 +1,14 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom"
 
-const Pagination: FC<{ path: string, page: number, perPage: number, count: number}> = ({ path, page, perPage, count }) => {
+type Props = {
+    path: string;
+    page: number;
+    perPage: number;
+    count: number;
+}
+
+const Pagination: FC<Props> = ({ path, page, perPage, count }) => {
     return(
         <nav className="pagination is-centered">
             <Link
