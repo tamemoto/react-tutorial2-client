@@ -25,10 +25,10 @@ const EnhancedAuthButton = () => {
     }
 
     if(isAuthenticated) {
-        return <AuthButton handleButton={handleClickLogoutButton} text={"ログアウト"}/>
+        return <AuthButton handleButton={handleClickLogoutButton} text="ログアウト"/>
     }
 
-    return <AuthButton handleButton={handleClickLoginButton} text={"ログイン"}/>
+    return <AuthButton handleButton={handleClickLoginButton} text="ログイン"/>
 }
 
 export default EnhancedAuthButton

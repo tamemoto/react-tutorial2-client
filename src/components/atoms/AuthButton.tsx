@@ -11,7 +11,7 @@ const AuthButton: FC<Props> = ({ handleButton, text }) => {
             className="button is-warning is-inverted is-outlined"
             onClick={handleButton}
         >
-            {{ text }}
+            { text }
         </button>
     )
 }
