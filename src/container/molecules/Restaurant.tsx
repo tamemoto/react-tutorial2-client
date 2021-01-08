@@ -1,14 +1,11 @@
 import React, {FC} from "react";
 import Review from "../../components/molecules/Review";
 import Pagination from "../../components/molecules/Pagination";
-import { RestaurantType, ReviewType } from "../../@types";
+import {RestaurantType, ReviewCustomType} from "../../@types";
 
 type Props = {
     restaurant: RestaurantType;
-    reviews: {
-        count: number,
-        rows: ReviewType[]
-    };
+    reviews: ReviewCustomType;
     page: number;
     perPage: number
 }
