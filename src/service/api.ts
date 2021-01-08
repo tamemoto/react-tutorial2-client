@@ -1,4 +1,4 @@
-import { RestaurantType, UserType, ReviewType } from "../@types";
+import { RestaurantType, ReviewCustomType, RestaurantCustomType } from "../@types";
 
 const request = async (path: string, options : any = {}): Promise<any> => {
     const url = `${process.env.REACT_APP_API_ORIGIN}${path}`
@@ -7,7 +7,7 @@ const request = async (path: string, options : any = {}): Promise<any> => {
 }
 
 
-export const getRestaurants = async (args: any = {}): Promise<RestaurantType[]> => {
+export const getRestaurants = async (args: any = {}): Promise<RestaurantCustomType> => {
     const params = new URLSearchParams(args)
     return request(`/restaurants?${params.toString()}`)
 }
@@ -16,7 +16,7 @@ export const getRestaurant = async (restaurantId: number): Promise<RestaurantTyp
     return request(`/restaurants?${restaurantId.toString()}`)
 }
 
-export const getRestaurantReviews = async (restaurantId: number, args: any = {}): Promise<ReviewType[]> => {
+export const getRestaurantReviews = async (restaurantId: number, args: any = {}): Promise<ReviewCustomType> => {
     const params = new URLSearchParams(args)
     return request(`/restaurants/${restaurantId}/reviews?${params.toString()}`)
 }

@@ -26,3 +26,13 @@ export type RestaurantType = {
     createdAt: string,
     updatedAt: string
 }
+
+export type ReviewCustomType = {
+    count: number;
+    rows: ReviewType[]
+}
+
+export type RestaurantCustomType = {
+    count: number,
+    rows: RestaurantType[]
+}
