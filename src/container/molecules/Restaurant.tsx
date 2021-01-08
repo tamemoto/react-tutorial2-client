@@ -1,6 +1,6 @@
 import React, {FC} from "react";
-import Review from "../../components/Review";
-import Pagination from "../../components/Pagination";
+import Review from "../../components/molecules/Review";
+import Pagination from "../../components/molecules/Pagination";
 import { RestaurantType, ReviewType } from "../../@types";
 
 type Props = {

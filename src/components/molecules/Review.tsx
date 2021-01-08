@@ -1,7 +1,12 @@
 import React, { FC } from "react"
-import Datetime from "./Datetime"
+import Datetime from "../atoms/Datetime"
+import {ReviewType} from "../../@types";
 
-const Review: FC<{ review: any }> = ({ review }) => {
+type Props = {
+    review: ReviewType
+}
+
+const Review: FC<Props> = ({ review }) => {
     return(
         <article className="message is-dark">
             <div className="message-body p-2 pl-3">

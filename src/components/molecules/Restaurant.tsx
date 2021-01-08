@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { Link } from "react-router-dom"
 import Review from "./Review"
-import { RestaurantType } from "../@types";
+import { RestaurantType } from "../../@types";
 
 const Restaurant: FC<RestaurantType> = (restaurant) => {
     return(

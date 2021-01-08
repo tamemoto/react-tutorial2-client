@@ -1,9 +1,9 @@
 import React, { FC } from "react"
-import Breadcrumb from "../Breadcrumb";
-import Loading from "../Loading";
+import Breadcrumb from "../molecules/Breadcrumb";
+import Loading from "../atoms/Loading";
 import Restaurant from "../../container/molecules/Restaurant";
 import Form from "../../container/molecules/Form";
-import {RestaurantType, ReviewCustomType} from "../../@types";
+import { RestaurantType, ReviewCustomType } from "../../@types";
 
 type Props = {
     params: any;

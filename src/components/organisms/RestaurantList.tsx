@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import Breadcrumb from "../Breadcrumb";
-import Loading from "../Loading";
+import Breadcrumb from "../molecules/Breadcrumb";
+import Loading from "../atoms/Loading";
 import {RestaurantCustomType, RestaurantType} from "../../@types";
-import Restaurant from "../Restaurant";
-import Pagination from "../Pagination";
+import Restaurant from "../molecules/Restaurant";
+import Pagination from "../molecules/Pagination";
 
 type Props = {
     restaurants: RestaurantCustomType | null
